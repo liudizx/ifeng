@@ -1,0 +1,39 @@
+<!--index.wxml-->
+<import src="../template/template.wxml"/>
+<!--<scroll-view class="scrollbox" bindscrolltolower="loadMore" style="height:500rpx;">-->
+<view class="container">
+  <!--nav s-->
+  <view class="nav-scroll">
+    <view class="more">+</view>
+    <scroll-view class="scroll-view-nav" scroll-x="true">
+      <text wx:for="{{section}}" id="{{item.id}}" catchtap="handleTap" class="nav-name {{item.id == currentId ? 'nav-hover' : ''}}">{{item.name}}</text>
+    </scroll-view>
+  </view>
+  <!--nav e-->
+  
+
+  <!--swiper s-->
+  <view class="swiper">
+    <swiper indicator-dots="{{indicatorDots}}"
+      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{index_list_data}}">
+        <swiper-item>
+          <navigator url="../imgtext/imgtext?index={{index}}">
+            <image src="{{item.imgUrl}}" width="100%"/>
+            <view class="swiper-brief">{{item.title}}</view>
+            <view class="swiper-index"><view>{{index+1}}</view> / {{length}}</view>
+            <view class="swiper-bg"></view>
+          </navigator>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <!--swiper e-->
+
+  <!--list s-->
+  <view class="list-con">
+    <template is="imgtextlist" data="{{index_list_data,list}}" />
+  </view>
+  <!--list e-->
+</view>
+<!--</scroll-view>-->
