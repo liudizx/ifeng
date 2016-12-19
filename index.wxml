@@ -30,6 +30,10 @@
   </view>
   <!--swiper e-->
 
+
+dkjashjkdhsajkhdsahdhdksaj
+
+
   <!--list s-->
   <view class="list-con">
     <template is="imgtextlist" data="{{index_list_data,list}}" />
