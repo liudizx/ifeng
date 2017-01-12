@@ -1,0 +1,1065 @@
+
+<script type="text/javascript" src="https://y2.ifengimg.com/ifengimcp/sta/20140312/jquery_1.11.js" ></script>
+<script type="text/javascript" src="https://p0.ifengimg.com/a/2016/1213/jquery.json-2.3.js" ></script>
+<script type="text/javascript">
+    function ObjToArr(obj) {
+        var a = $.evalJSON( obj ),
+            b = $.makeArray(a);
+        return b[0];
+    }
+    var sourceId = "";
+    var defaultLength = "0",
+        videoLength = "0",
+        vampireLength = "0";
+    if(defaultLength){
+        var defaultArray = 'null';
+        var DefaultArray = ObjToArr(defaultArray);
+    }
+    if(videoLength){
+        var videoLength = 'null';
+        var VideoArray = ObjToArr(videoLength);
+
+    }
+    if(vampireLength){
+        var vampireLength = 'null';
+        var VampireArray = ObjToArr(vampireLength);
+
+    }
+
+</script><script>
+    var default_array = new Array(10),//默认正文/幻灯
+        vampire_array = new Array(10),//自媒体
+        video_array = new Array(10),
+        down_array;
+    default_array['upopen'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1348580919325';//分享页顶部banner
+    default_array['comtmore'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1348580715363';//查看更多评论
+    default_array['focuspic'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1348580680920';//精彩推荐大图
+    default_array['downopen'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1348580715362';//底部悬浮图
+    default_array['lookmore'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1348580393722';//到凤凰新闻看更多
+    default_array['algorithm'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1348580330665';//客户端推荐算法推荐
+    default_array['editor'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1348748844342';//人工推荐
+    default_array['secshare'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1350561572448';//二次分享成功
+    default_array['related'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1349214019186';//相关阅读 
+    default_array['subscribe'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1350561044933';//订阅
+  
+    video_array['upopen'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1348580919325';//分享页顶部banner
+    video_array['downopen'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1348580715362';//底部悬浮图
+    video_array['comtmore'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1350560803153';//查看更多评论
+    video_array['focuspic'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1350561572450';//精彩推荐大图
+    video_array['lookmore'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1350560887597';//到凤凰新闻看更多
+    video_array['algorithm'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1350561044933';//客户端推荐算法推荐
+    video_array['editor'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1350561052268';//人工推荐
+    video_array['secshare'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1350561572448';//二次分享成功
+    video_array['subscribe'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1350561044933';//订阅
+  
+    vampire_array['upopen'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1348580919325';//分享页顶部banner
+    vampire_array['downopen'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1348580715362';//底部悬浮图
+    vampire_array['comtmore'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1350561572445';//查看更多评论
+    vampire_array['focuspic'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1350561572446';//精彩推荐大图
+    vampire_array['lookmore'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1350561572447';//到凤凰新闻看更多
+    vampire_array['editor'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1350561572449';//人工推荐
+    vampire_array['secshare'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1350561572448';//二次分享成功
+    vampire_array['subscribe'] = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1350561044933';//自媒体订阅
+
+
+    var  sharenews_dataApi =   "http://api.iclient.ifeng.com/ipadtestdoc",
+        sharenews_api =  "sharenews.f",
+        sharenews_openPath = "wakeupiOS/ifengnews",
+        appname = "comifextnews";
+  var autoFresh = "1",
+      ShareUrlNow = "http://share.iclient.ifeng.com/sharenews.f?aid=030180050504779&autoFresh=1";
+  
+  var channelId = "default";
+    var origin_channel = "unknown"+'|'+ channelId;
+</script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta name = "format-detection" content = "telephone=no">
+    <script type="text/javascript">
+        // 来自手凤的下载地址(带url参数ch=news_sf)
+        // 5301
+        window.sfDownUrlTop = 'http://api.3g.ifeng.com/ifengtg?adid=18952';
+        // 5302
+        window.sfDownUrlBottom = 'http://api.3g.ifeng.com/ifengtg?adid=18953';
+        // alipay
+        window.alipayDownUrl = 'http://api.3g.ifeng.com/ifengtg?adid=19369';
+    </script>
+    <script type="text/javascript" src="http://y2.ifengimg.com/ifengimcp/sta/20140312/jquery_1.11.js"></script>
+    <script type="text/javascript" src="http://y1.ifengimg.com/ifengimcp/sta/20141023/jquery.cookie.js_103559.js"></script>
+    <script type="text/javascript" src="http://y0.ifengimg.com/ifengimcp/sta/20140612/ground(8).js_102623.js"></script>
+    <script type="text/javascript" src="http://p1.ifengimg.com/a/2016/1209/ifengshareBase20161209.js"></script>
+    <script type="text/javascript"  src="http://p1.ifengimg.com/a/2016/1009/red_packets_count01.js"></script>
+    <link rel="stylesheet" href="http://p3.ifengimg.com/a/2016/1025/SecondShare.css">
+    <style>
+
+        .container img{
+            border-bottom: 1px solid #ececec;
+            border-top: 1px solid #ececec;}
+        #show_more_btn2 img{
+            border:none;
+        }
+        .ios, .android{
+            z-index:10002;
+        }
+        .open-pop{
+            z-index:10002;
+        }
+    </style>
+
+            <script>
+            if(DefaultArray){
+                console.log('12312');
+                down_array = DefaultArray;
+            }else{
+                console.log('2222222');
+                down_array = default_array;
+            }
+            console.log(down_array);
+        </script>
+        <html>
+<head>
+
+    <title>媒体：美俄又互相伤害了，2017有好戏看了-凤凰新闻</title>
+    <link rel="stylesheet" href="http://y0.ifengimg.com/a/2015/0324/vplayer.css">
+            <script type="text/javascript" src="http://p0.ifengimg.com/a/2016/1226/ifengShareDoc20161226.js"></script>
+        <script>
+        setTimeout(function () {
+            autoResizeVideo($('.mod-yivideo-warp'));
+            var callVideo_width = $('.mod-yivideo-warp').width() -2;$('.callVideo').css('width',callVideo_width);
+            var callVideo_img_height = $('.callVideo img').height();
+            if(callVideo_img_height){
+                $('.callVideo img').css('top',(57-callVideo_img_height)*0.5);
+            }else{
+                $('.callVideo img').css('top','18px');
+            }
+            $('.callVideo').css('opacity','1');
+        }, 100);
+    </script>
+    <link rel="stylesheet" href="http://p3.ifengimg.com/a/2016/1230/sharedoc20161230.css"/>
+    <link rel="stylesheet" href="http://p2.ifengimg.com/a/2016/1226/sharebase.css"/>
+</head>
+<body style="background:#fff;">
+<style>
+    .mod-yivideo-warp{height:260px}.callVideo{position:relative;height:57px;width:100%;border:1px solid #ececec;border-top:0;background:#fff;opacity: 0;}.callVideo img{position: relative;width:82%;left:9%;border: none;top:10px;}
+</style>
+<script>
+    $(document).ready(function () {
+        $("#Iframe1").height(window.screen.availHeight);
+    })
+</script>
+<div class="xgtjdiv_shadow" style="display:none"></div>
+<div class="xgtjdiv" style="display:none">
+    <div class="xgtjdiv_top" >
+        <p><img class="success_pic" src="http://p2.ifengimg.com/ifengimcp/pic/20160907/57e3d79919249717cd5c_size1_w37_h37.png"><span>分享成功</span></p>
+        <div class="close_xgtjdiv" ><img src="http://p0.ifengimg.com/ifengimcp/pic/20160902/79f4b40625a6a24bf553_size1_w27_h26.png"></div>
+    </div>
+    <div class="xgtjdiv_content" >
+        <h2>相关推荐</h2>
+        <ul>
+            <li class="relate_news0 "down_tag="secshare" tag="t5" rnum="0"><a href=""><img src="http://p0.ifengimg.com/ifengimcp/pic/20160914/e564487a99d5cf9a4904_size1_w9_h9.png"><p></p></a></li>
+            <li class="relate_news1 " down_tag="secshare" tag="t5" rnum="1"><a href=""><img src="http://p0.ifengimg.com/ifengimcp/pic/20160914/e564487a99d5cf9a4904_size1_w9_h9.png"><p></p></a></li>
+            <li class="relate_news2 " down_tag="secshare" tag="t5" rnum="2"><a href=""><img src="http://p0.ifengimg.com/ifengimcp/pic/20160914/e564487a99d5cf9a4904_size1_w9_h9.png"><p></p></a></li>
+        </ul>
+    </div>
+    <div class="xgtjdiv_bottom" >
+        <div class="xgtjdiv_button openApp" down_tag="secshare" id="xgtjdiv_button">
+            <p class="logo_img">
+                <img src="http://p2.ifengimg.com/ifengimcp/pic/20160914/e9747a021aae1eaf5645_size2_w41_h41.png">
+            </p>
+            <p>看更多有品 、有趣的新闻</p>
+        </div>
+    </div>
+</div>
+<script>
+    var touch_ban = 1;
+    var ua = navigator.userAgent,
+        isAndroid = navigator.userAgent.match(/android/ig),
+        isIos = navigator.userAgent.match(/iphone|ipod/ig),
+        isIpad = navigator.userAgent.match(/ipad/ig);
+
+    function relatenewsShow() {
+        checkLiwords();
+        var text = $('.relate_news0').find('p').text();
+        if(text && text !=''){
+            $('.xgtjdiv_shadow, .xgtjdiv').show();
+            touch_ban = 0;
+        }
+        var stadigurl = "http://stadig.ifeng.com/appsta.js?datatype=newsappsns&mos=iphone&userkey=47cf4800fc232bddb7b0e37d6b5dd1ae&ua=&share=unknown&session=";
+        var sessionStr = "2016-12-31+08:56:00#action#type=secshare$ref="+referer+"$kind="+doctype;
+        var encodedSession = encodeURIComponent(sessionStr);
+        $('body').append('<img src="' + stadigurl + encodedSession +'" alt="" style="display:none;"/>');
+    }
+    function checkLiwords() {
+        for(var i =0;i<3;i++){
+            var classname = 'relate_news'+i;
+            var text = $('.'+classname).find('p').text();
+            if(text == ''){
+                $('.'+classname).hide();
+            }
+        }
+    }
+    function getRelatenews() {
+        for(var i=0;i<3;i++){
+            var id = 'relate_news'+i;
+            var doc = $('#'+id);
+            if(doc){
+                var title = doc.attr('title');
+                var href = doc.attr('url');
+                var type = doc.attr('doc_type');
+                var docid = doc.attr('doc_id');
+                var from_type = doc.attr('from_type');
+                if(from_type && from_type=='vampire'){
+                    var ll = 'http://api.iclient.ifeng.com/api_vampire_article_detail?aid='+docid+'&mid=1469608281848_zg049q643';
+                    var ls = 'comifengnewsclient://call?type='+type+'&id=http://api.iclient.ifeng.com/api_vampire_article_detail?aid='+docid;
+                }else{
+                    var ll = 'http://api.iclient.ifeng.com/ipadtestdoc?aid='+docid+'&mid=1469608281848_zg049q643';
+                    var ls = 'comifengnewsclient://call?type='+type+'&id=http://api.iclient.ifeng.com/ipadtestdoc?aid='+docid;
+                }
+                var wxlocation2 = "https://y0.ifengimg.com/wakeupiOS/ifengnews/call/?type="+type+"&id="+encodeURIComponent(ll)+"&app-argument="+encodeURIComponent(ls);
+
+
+                $('.'+id).find('p').text(title);
+                $('.'+id).attr('iosCall',wxlocation2);
+                $('.'+id).attr('androidCall',ls);
+                $('.'+id).attr('aid',docid);
+                $('.'+id).attr('url',href);
+            }
+
+        }
+    }
+
+
+    $(document).ready(function () {
+
+        getRelatenews();
+        $('html').on('touchmove',function (e) {
+
+            if(touch_ban!= 1){
+                e.preventDefault();
+            }
+
+        });
+
+        var window_height = window.screen.height,
+            body_width = $('body').css('width').replace('px', ''),
+            div_height = $('.xgtjdiv').css('height').replace('px',''),
+            width = body_width * 0.9,
+            margin_left = -0.5 * width,
+            content_height = (div_height - 130)+'px';
+        $('html').css('font-size',0.1*window_height);
+        $('.xgtjdiv').css({'width': width, "margin-left": margin_left});
+        $('.close_xgtjdiv, .xgtjdiv_shadow ,.xgtjdiv_button').click(function () {
+            touch_ban = 1;
+            $('.xgtjdiv, .xgtjdiv_shadow').hide();
+        });
+
+        $('.xgtjdiv_content li').click(function () {
+            var to_docid = $(this).attr('aid');
+            var tag = $(this).attr('tag');
+            var rnum = $(this).attr('rnum');
+            var to_url = $(this).attr('url');
+            var down_tag = $(this).attr('down_tag'),
+                androidCall = $(this).attr('androidCall'),
+                iosCall = $(this).attr('iosCall');
+            var download_new = down_array[down_tag];
+            var stadigurl = "http://stadig.ifeng.com/appsta.js?datatype=newsappsns&mos=iphone&userkey=47cf4800fc232bddb7b0e37d6b5dd1ae&ua=&share=unknown&session=";
+            var sessionStr = "2016-12-31+08:56:00#action#to=" + to_docid + "$ref=" + referer + "$type=click$rnum=" + rnum + "$tag=" + tag+"$kind="+doctype+"$od=$url=" + to_url;
+            var encodedSession = encodeURIComponent(sessionStr);
+            $('body').append('<img src="' + stadigurl + encodedSession +'" alt="" style="display:none;"/>');
+
+            if(isAndroid){
+                location.href = download_new + '&android_scheme=' + encodeURIComponent(androidCall+ '&kind=' + origin_channel);
+                return false;
+            }else if(isIpad || isIos){
+                location.href = iosCall+ '&kind=' + origin_channel;
+                return false;
+            }
+
+        });
+
+        $('.xgtjdiv_button').click(function () {
+            var stadigurl = "http://stadig.ifeng.com/appsta.js?datatype=newsappsns&mos=iphone&userkey=47cf4800fc232bddb7b0e37d6b5dd1ae&ua=&share=unknown&session=";
+            var sessionStr = "2016-12-31+08:56:00#action#type=readmore$ref="+referer+"$kind="+doctype+"$od=";
+            var encodedSession = encodeURIComponent(sessionStr);
+            $('body').append('<img src="' + stadigurl + encodedSession +'" alt="" style="display:none;"/>');
+        });
+
+    });
+</script><style>
+      .video_link_div{display:none}.video_shadow{position:fixed;top:0;left:0;height:100%;width:100%;background:#000;opacity:.5;z-index:10000}.video_alert{position:fixed;top:30%;left:50%;margin-left:-120px;width:240px;height:135px;background:#fff;opacity:.9;border-radius:6px;z-index:10001}.alert_top{position:absolute;top:0;left:0;display:block;height:45px;width:100%;border-bottom:1px solid #f2f2f2;padding:25px 0}.alert_top span{position:relative;line-height:18px;height:18px;font-size:18px;color:#1a1a1a;text-align:center;width:100%;display:block}.alert_top span:first-child{margin-bottom:9px}.alert_bottom_left{position:absolute;bottom:0;left:0;width:50%;height:40px;border-right:1px solid #f2f2f2}.alert_bottom_right{position:absolute;bottom:0;right:0;width:50%;height:40px}.alert_bottom_right p{line-height:40px;font-size:14px;color:#f54343;text-align:center}.alert_bottom_left p{line-height:40px;font-size:14px;color:#5c5c5c;text-align:center}  
+    </style>
+<div class="video_link_div">
+    <div class="video_shadow"></div>
+    <div class="video_alert">
+        <div class="alert_top"><span>打开凤凰新闻</span><span>观看更流畅</span></div>
+        <div class="alert_bottom">
+            <div class="alert_bottom_left"><p>稍后</p></div>
+            <div class="alert_bottom_right"><p>立即前往</p></div>
+        </div>
+    </div>
+</div><div class="se clearfix" id="header-wrap" style="background:#fff;opacity:0.95;border-bottom:1px solid #f5f5f5;">
+    <!-- <a id="openApp" class="openApp" href=""> -->
+    <a id="openApp" class="openApp" down_tag='upopen' href="javascript:;">
+        <span class="s_l"><!--<img src="http://y3.ifengimg.com/ifengimcp/pic/20150315/7fbd33d12875e5b23ed8_size8_w382_h74.png" />--><img src="http://p2.ifengimg.com/ifengimcp/pic/20160914/84d6de0345fa1caa8121_size11_w382_h74.png"></span>
+        <span  id="upopen" class="s_r"><i>立即打开</i></span>
+    </a>
+</div>
+<style>
+    .footer_fixed{display:none;position:fixed;bottom:0;left:0;right:0;height:56px;background:#fff;opacity:.95;padding-right:35px;overflow:hidden;z-index:9999;border-top: 1px solid #f5f5f5;}.footer_fixed a{position:relative;display:block}.footer_fixed span{display:inline-block;position:absolute}.ftf_l{margin-left:9px;width:100%}.ftf_l img{position:relative;height:37px;width:54px;margin-top:8px;margin-bottom:11px}.ftf_r{top:14px;right:0}.footer_fixed span.ftf_r b{line-height:28px;display:inline-block;background:#f54343;padding:0 6px;font-size:14px;text-align:center;color:#fff;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;font-style:normal}.btn_close{display:block;position:absolute;top:19px;right:10px;width:18px;height:18px;background-image:url(http://p3.ifengimg.com/ifengimcp/pic/20160914/82026db75a6958ffc1d1_size1_w36_h36.png);background-repeat:no-repeat;background-position:center center;background-size:18px 18px}.hot_doc{font-size:14px;line-height:18px;height:37px;overflow:hidden;text-overflow:ellipsis;top:8px;position:absolute;left:63px;right:90px}
+</style>
+<div class="footer_fixed" style="display:none">
+    <a style="height: 54px" id="downopen" class="hot_bottom"  down_tag="downopen" href="javascript:;">
+        <span class="ftf_l" style="top:0;left:0;">
+            <img class="hot_img" src="">
+            <article class="hot_doc" style=""></article>
+        </span>
+        <span class="ftf_r"><b>立即打开</b></span>
+    </a>
+    <i class="btn_close"></i>
+</div>
+<script type="text/javascript" src="http://p2.ifengimg.com/a/2016/1229/bottomlink_20161229.js"></script>
+    <div class="open-pop"><img class="ios"
+                           src="http://y2.ifengimg.com/ifengimcp/pic/20141219/3c07313cb9cf70a16a69_size44_w640_h415.png"><img
+        class="android" src="http://y3.ifengimg.com/ifengimcp/pic/20141219/4a7d39ba1cf16d09ad3d_size40_w640_h415.png">
+</div>
+<div class="openApp video_link" style="display: none;"></div>
+<div class="container">
+
+                    <div id="whole_content" class="zw-word">
+            <h3 class="n-title">媒体：美俄又互相伤害了，2017有好戏看了</h3>
+
+             <div class="pl-all clearfix"><div class="diylogo" style="background:#d6cdb1"><span>侠</span></div><p class="source openApp"  down_tag= "subscribe">侠客岛</p>
+                <img class="subscribe openApp" down_tag= "subscribe" id="subscribe" src="http://p1.ifengimg.com/ifengimcp/pic/20161227/ee8f2699a90611fa7444_size2_w96_h48.png">
+                <p class="uTime">2016/12/31 00:55:38</p></div>
+            
+            
+            <!-- 文章内容开始位置 -->
+            <div id="article_content" class="zw-real">
+                <p class="duanluo"><p><p>原标题：【解局】美俄又互相伤害了，2017有好戏看了</p><p class="duanluo">
+<p>2016年倒数第二天，一睁眼摸手机，看到推送的新闻，还以为时间倒流到了几十年前：“奥巴马宣布制裁俄罗斯，授权驱逐35名俄罗斯外交官……”</p><p class="duanluo">
+<p>这份制裁令看上去来势汹汹：不但针对4个俄罗斯公民和5家实体机构，勒令35名俄罗斯外交人员在72小时内离开美国，还关闭了两所俄罗斯外交处所。</p><p class="duanluo">
+<p>俄方当即回应要“予以回击”，宣布关停莫斯科英美学校——在这所学校读书的，正是美国、英国、加拿大等国使馆官员的孩子（英加内心想必是崩溃的）。同时，外长拉夫罗夫也建议普京，同样驱逐35名美国外交人员。</p><p class="duanluo">
+<p>即将下台的观海同志，这是要搞事情？</p>
+<p class="detailPic"><div class="pic-video"><article><img src="http://d.ifengimg.com/mw604/p2.ifengimg.com/fck/2016_53/f5555f590536ea9_w810_h539.jpg" /></article></div><p class="duanluo">
+<p><small><span>传说中的“死亡对视”</span></small></p><p class="duanluo">
+<p><strong><span style="-webkit-font-kerning: none;">黑客</span></strong></p><p class="duanluo">
+<p>说起俄罗斯，奥巴马最近简直气不打一处来。</p><p class="duanluo">
+<p>之所以签署制裁令，就是因为CIA和FBI都向奥巴马保证，就是俄罗斯的那帮黑客下黑手，才让特朗普这个惹事精当上总统的。据他们说，俄罗斯黑客入侵了美国民主党和一些政客的邮箱，导致一系列有关于希拉里和民主党政治丑闻的邮件被曝光，成为希拉里在大选中最大绊脚石之一。</p><p class="duanluo">
+<p>搞笑的是，在大选前两周，希拉里助手阿贝丁的丈夫韦纳因为色情短信一事而被调查，之后FBI在其电脑里发现了更多“邮件门”的证据，因而重启了此前一度暂停的调查。对希拉里阵营来说，这次调查看上去就是那压死骆驼的最后一根稻草。</p>
+<p class="detailPic"><div class="pic-video"><article><img src="http://d.ifengimg.com/mw604/p2.ifengimg.com/fck/2016_53/81e5d3257c6d462_w500_h390.jpg" /></article></div><p class="duanluo">
+<p>还据说啊，俄罗斯黑客也入侵了共和党的邮箱，但是，也就逛了逛，挥一挥衣袖，没带走一封邮件。</p><p class="duanluo">
+<p>他们还说，俄罗斯黑客们还在网络上散布了许多假新闻，一味抹黑希拉里、称赞特朗普。前两天，奥巴马批准的2017《国防授权法案》就专门提出，要建立一个用来搞信息战的全球作战中心（Global Engagement Center），应对“俄罗斯假新闻”的宣传战。</p><p class="duanluo">
+<p>对于这些指控，俄罗斯当然是一概否认的。特朗普则摆摆手表示自己不知情，我这么厉害，当然是靠实力赢的。但是在奥巴马等民主党人看来，不管这大选是怎么输的，你俄罗斯跑不了干系，就算不是你导致的，这锅也得你背。</p><p class="duanluo">
+<p>对于奥巴马来说，自己讨厌的特朗普胜选不说，关键是，自从当选以来这一个多月，白宫已经给特朗普擦了多少回屁股了？自己都要卷铺盖走人了还要给这家伙到处灭火，偏偏这家伙还是侯任总统，奥巴马心里这个憋屈。正当这会儿，CIA们告诉俄罗斯黑客有证据了，那还不撸起袖子治上一把？</p>
+<p class="detailPic"><div class="pic-video"><article><img src="http://d.ifengimg.com/mw604/p2.ifengimg.com/fck/2016_53/eeb80c46b82d91c_w605_h328.jpg" /></article></div><p class="duanluo"> <p><strong>“内讧”</strong></p><p class="duanluo">
+<p>不出所料，奥巴马这边火还没发完，特朗普就又发话了。</p><p class="duanluo">
+<p>事发后4小时，特朗普就写了一份书面回应：“是时候（放下这事儿）去做其他更伟大的事情了。不过，为了我们国家和人民的利益，我会在下周跟情报机构的负责人们见面，从而获取这件事（俄罗斯黑客干涉选举）的最新进展”。看上去还蛮平静的语调，里面都是对奥巴马这么急匆匆行事的不满。</p>
+<p class="detailPic"><div class="pic-video"><article><img src="http://d.ifengimg.com/mw604/p2.ifengimg.com/fck/2016_53/5f843acb254a1fc_w620_h230.jpg" /></article></div><p class="duanluo">
+<p>这种不满，爆发于前几天奥巴马接受CNN采访时的表态。当时，观海同志自信满满地说，“如果我今年可以参加大选，肯定稳赢。”</p><p class="duanluo">
+<p>这还了得？特日天立马表示不服，连发几条推特，历数奥巴马的“罪过”，比如“你这几年让ISIS坐大”、“美国的失业率和失败的医改”，“你要是参选你稳输”！</p>
+<p class="detailPic"><div class="pic-video"><article><img src="http://d.ifengimg.com/mw604/p2.ifengimg.com/fck/2016_53/3c53740b2288a60_w591_h117.jpg" /></article></div><p class="duanluo">
+<p>同时，针对近日奥巴马在台湾、以色列犹太定居点等等问题上与背道而驰的做法，特朗普气得在推特上指着奥巴马的鼻子骂：你看你给我设的路障，亏我之前以为我们之间能平稳过渡呢！</p>
+<p class="detailPic"><div class="pic-video"><article><img src="http://d.ifengimg.com/mw604/p2.ifengimg.com/fck/2016_53/7279aca80e850e6_w594_h202.jpg" /></article></div><p class="duanluo"> <p><strong>分歧</strong></p><p class="duanluo">
+<p>的确，如特朗普所言，这次政权的交接，注定不会是一次平稳的过渡。毕竟，至少从目前看，俩人的政策分歧显得略大。</p><p class="duanluo">
+<p>比如台湾。不安排理出牌的特朗普，不仅前三十年无古人的接了蔡英文的电话，还表示，中国要是不在贸易方面做出让步，美国为什么要受制于“一个中国”原则？</p><p class="duanluo">
+<p>这可吓坏了奥巴马。作为一个“老司机”，奥巴马知道台湾问题和“一个中国”原则是中国的核心利益，碰不得。于是他一边派白宫出来解释保证美国坚持“一个中国”，一边还亲自出来敲打台湾，说你是一定程度的“自治”（Autonomy），很多事情你说了不算，以至于岛内哀嚎一片，说台湾“被港澳化了”。</p><p class="duanluo">
+<p>再看看特朗普的选人，就更明显。卫生部长，反对奥巴马医改；国防部长、安全事务助理、国土安全部长等，一水儿的反对伊核协议、对奥巴马中东政策深怀不满时刻准备捋袖子回去大干一场的鹰派军官；驻以色列大使，支持以色列和其定居点建设；最重量级的国务卿，居然还是一个“亲俄”的商人。每一个名字，奥巴马听了估计都会郁闷半天。</p><p class="duanluo">
+<p>要知道，这8年，奥巴马没干啥别的，主要就是在国内推医改，在中东撤撤兵，签了个伊核协议，调和巴以问题，各种制裁俄罗斯，外加重返亚太和建交古巴。眼瞅着这就是辛辛苦苦干八年，一夜回到上任前的节奏啊。</p>
+<p class="detailPic"><div class="pic-video"><article><img src="http://d.ifengimg.com/mw604/p2.ifengimg.com/fck/2016_53/02f00985e536cd0_w1024_h576.jpg" /></article></div><p class="duanluo">
+<p>还有最近的事儿。前两天，安理会通过了对以色列的一份谴责声明，主要是针对以色列在约旦河西岸以及东耶路撒冷建设犹太人定居点。原本，以色列寄希望盟友美国会动用一票否决权阻止这份决议的通过，可万万没想到，奥巴马政府在最终时刻选择了弃权，最终决议顺利通过。</p><p class="duanluo">
+<p>这下特朗普可不干了。特朗普亲以色列的立场人尽皆知，不仅自己器重的大女婿是犹太人，他还提名了一位支持以色列建立定居点的驻以大使。但是，奥巴马政府临下台前竟然搞了这么一出，特朗普立马抓起手机发了推特，一边批评奥巴马，一边让以色列坚持到他自己上台。</p>
+<p class="detailPic"><div class="pic-video"><article><img src="http://d.ifengimg.com/mw604/p2.ifengimg.com/fck/2016_53/d23186254755259_w592_h317.jpg" /></article></div><p class="duanluo">
+<p>某种程度上，奥巴马此次宣布制裁俄罗斯，也是给特朗普一个脸色看。你不是频频给俄罗斯释放善意吗？我就制裁！只许你折腾我，我不能折腾你？</p><p class="duanluo">
+<p><strong>较量</strong></p><p class="duanluo">
+<p>当然了，奥巴马和特朗普这几个回合背后，实则是以民主党为主的反特朗普势力和挺特朗普势力的角逐。</p><p class="duanluo">
+<p>在暨南大学国际关系教授陈定定看来，民主党此次与总统之位擦肩而过，对于输掉大选这一结果还是无法接受，因而也对特朗普产生了“怨恨”之心。近期奥巴马政府的一系列动作，也是想在下台前给特朗普“封路”，制造困难。如此次制裁俄罗斯一事，日后即便是特朗普想要推翻前任政府的决定，他要付出的政治成本也是巨大的。</p><p class="duanluo">
+<p>除了民主党设障碍，特朗普上台后需要依仗的国会主力共和党，也不全是他的坚实后盾。就如制裁令，共和党内也有不同的声音。据《政治家》报道，众议院议长保罗&middot;莱恩认为政府对俄罗斯的制裁“有点过”，但老牌共和党参议员麦凯恩则认为制裁力度还远远不够。</p>
+<p class="detailPic"><div class="pic-video"><article><img src="http://d.ifengimg.com/mw604/p2.ifengimg.com/fck/2016_53/baca75425a6436d_w1280_h853.jpg" /></article></div><p class="duanluo">
+<p>在陈定定教授看来，特朗普现在的许多言行，在其执政后或者会有变化，或者无法贯彻。原因既有美国国内的阻力，又有国际体系的牵制。</p><p class="duanluo">
+<p>比如以色列一事，特朗普虽然任命了一位亲以大使，但一方面，大使所做的事情毕竟有限；另一方面，以色列建设定居点行为是受到国际社会的普遍谴责的，特朗普若是一意孤行，则会成为国际社会的众矢之的。就连美国国内的许多以色列学者，都对特朗普能否改变此事持悲观态度。</p><p class="duanluo">
+<p>再如俄罗斯。据外媒消息，特朗普现在正在基辛格的帮助下想要重修美俄关系。在基辛格看来，美俄关系的正常化符合美国的利益，也有利于全球稳定。相较于美国国内年轻一代政治家，基辛格在国际事务，尤其是协商方面，无疑经验丰富。</p><p class="duanluo">
+<p>但是，陈定定教授也指出，现在国内的反俄势力强大，几乎没有人敢公开说俄罗斯的好话。再加上美俄之间存在的结构性冲突，两国在欧洲等地利益的拉扯，想要修复美俄关系，特朗普还有很长的路要走。</p><p class="duanluo">
+<p>柳暗花明又一村。就在今晚，普京宣布，不会驱逐美国驻俄罗斯外交官。想想看，一向有仇必报的普京，都能忍下这口气、憋住这股火，还真是给特朗普留了不少面子，也给日后美俄关系的改善留了一扇窗。不知道这一次，特朗普能否抓住机会？</p><p class="duanluo">
+<p>文／百里明颐</p><p class="duanluo"></p><p class="duanluo"></p>            </div>
+                        <div id="div_cover"></div>
+            <div class="editorcode" style="display:none;text-align: right;font-size: 12px;color: #999;"><p style="color: #999;">责任编辑：王天祥 PX035</p></div>
+        </div>
+    </div>
+<style>.er_desc p {
+        min-width: 10px;
+        min-height: 16px;
+    }</style>
+
+<br/>
+<div  id="related_area"><div style="margin-left:9px" class="gt" >相关阅读</div><div style="position: relative;margin: 12px 9px 0;"><ul id="xgyd_ul" class="yc_news"><li>
+        <a href="javascript:;">
+            <article aid="117347476" position="index_0" type="article" doc_type="doc" tag="t1" down_tag="related" url="share.iclient.ifeng.com/sharenews.f?aid=117347476">
+                <p style="margin-left:99px">2017最美旅行月历出炉，厉害了！</p>
+                <img class="lazys" src="http://d.ifengimg.com/w178_h128/p3.ifengimg.com/fck/2016_40/be0f1d212589379_w533_h800.jpg" original="http://d.ifengimg.com/w134_h96_q75/p0.ifengimg.com/pmop/2016/1230/5CCC47F0AAE2362FF9051EA1C83D985109FCEA6B_size61_w750_h422.jpeg">
+                <h4><img id="openapp_logo" src="http://p2.ifengimg.com/ifengimcp/pic/20161118/607bcfe0628cd1082b2f_size2_w176_h38.png" alt="">12-30<span>0</span></h4>
+            </article>
+        </a>
+    </li></ul><ul id="xgyd_ul" class="yc_news"><li>
+        <a href="javascript:;">
+            <article aid="117333337" position="index_1" type="article" doc_type="doc" tag="t1" down_tag="related" url="share.iclient.ifeng.com/sharenews.f?aid=117333337">
+                <p style="margin-left:99px">全球媒体人展望2017</p>
+                <img class="lazys" src="http://d.ifengimg.com/w178_h128/p3.ifengimg.com/fck/2016_40/be0f1d212589379_w533_h800.jpg" original="http://d.ifengimg.com/w134_h96_q75/p0.ifengimg.com/pmop/2016/1230/A5688A9781C6F9B6B77BA59A58EBBFF64D281243_size70_w900_h500.jpeg">
+                <h4><img id="openapp_logo" src="http://p2.ifengimg.com/ifengimcp/pic/20161118/607bcfe0628cd1082b2f_size2_w176_h38.png" alt="">12-30<span>0</span></h4>
+            </article>
+        </a>
+    </li></ul><ul id="xgyd_ul" class="yc_news"><li>
+        <a href="javascript:;">
+            <article aid="117047008" position="index_2" type="article" doc_type="doc" tag="t1" down_tag="related" url="share.iclient.ifeng.com/sharenews.f?aid=117047008">
+                <p style="margin-left:99px">搞笑：这时候只要扔出一个烟头，就有好戏看了！</p>
+                <img class="lazys" src="http://d.ifengimg.com/w178_h128/p3.ifengimg.com/fck/2016_40/be0f1d212589379_w533_h800.jpg" original="http://d.ifengimg.com/w134_h96_q75/p0.ifengimg.com/pmop/2016/1225/E2AF233839204A1D2A0685586D5132ECCD26B8F8_size33_w421_h540.jpeg">
+                <h4><img id="openapp_logo" src="http://p2.ifengimg.com/ifengimcp/pic/20161118/607bcfe0628cd1082b2f_size2_w176_h38.png" alt="">12-25<span>0</span></h4>
+            </article>
+        </a>
+    </li></ul></div></div><input type="hidden" id="relate_news0" doc_type="doc"  doc_id="117347476" title="2017最美旅行月历出炉，厉害了！" url="http://share.iclient.ifeng.com/news/sharenews.f?&aid=117347476" /><input type="hidden" id="relate_news1" doc_type="doc"  doc_id="117333337" title="全球媒体人展望2017" url="http://share.iclient.ifeng.com/news/sharenews.f?&aid=117333337" /><input type="hidden" id="relate_news2" doc_type="doc"  doc_id="117047008" title="搞笑：这时候只要扔出一个烟头，就有好戏看了！" url="http://share.iclient.ifeng.com/news/sharenews.f?&aid=117047008" />
+    <div class="hotcomment">
+        <div class="gt">热门跟帖</div>
+        <ul class="gt_list" id="commentList">
+
+        </ul>
+    </div>
+    <div id="comment_count" class="lookmore openAppCom" down_tag="comtmore"><a style="display:block;height:44px;" href="javascript:;">去凤凰新闻看更多评论(<font
+                class='dataCount'>0</font>)</a></div>
+<script>
+    var kind = "article";
+</script>
+<script type="text/javascript" src="http://p2.ifengimg.com/a/2016/1229/deeplink201612292.js"></script>
+<script>
+    var referer = "030180050504779",
+        doctype = "article",
+        time = "2016-12-31+08:56:00",
+        stadigurl = "http://stadig.ifeng.com/appsta.js?datatype=newsappsns&mos=iphone&userkey=47cf4800fc232bddb7b0e37d6b5dd1ae&ua=&share=unknown&session=";
+</script>
+
+<script type="text/javascript"  src="http://p2.ifengimg.com/a/2016/1207/expo_article_v5.js"></script>
+<div id="recommend_area">
+    <br>
+    <div class="gt" style="margin-left:9px">精彩推荐</div>
+    <div class="jctj_all"><article aid="030240050505933" doc_type="slide" down_tag="focuspic" type="pic" tag="t4" flag="flag" url="share.iclient.ifeng.com/sharenews.f?aid=030240050505933"><a href="sharenews.f?aid=030240050505933&amp;mid=1469608281848_zg049q643&download_tag=old_download"><img src="http://d.ifengimg.com/w604_h374_q95/p2.ifengimg.com/cmpp/2016/12/31/d6e1ee0f1e7911a3121bb5917c050a1d_size482_w640_h360.JPG" alt=""></a><div class="videotj"><a href="sharenews.f?aid=030240050505933&amp;mid=1469608281848_zg049q643">图集</a></div></article><p><img style="position:absolute;left:10px;display:inline-block;width:69.47px;height:15px;margin-top:2px;" src="http://p2.ifengimg.com/ifengimcp/pic/20161118/607bcfe0628cd1082b2f_size2_w176_h38.png" alt=""><a style="left:70px" href="sharenews.f?aid=030240050505933&amp;mid=1469608281848_zg049q643">巴勒斯坦妇女刺杀未遂后 </a></p></div><ul class="yc_news" id="yc_news_ex"><li><a class="recommend_top"><article aid="030180050499249" type="article" doc_type="doc" tag="t3"  down_tag="editor" flag="flag" url="share.iclient.ifeng.com/sharenews.f?aid=030180050499249"><p style="margin-left:99px;">离任前放大招！奥巴马宣布驱逐35名俄外交官</p><img  style="opacity:1" class="lazys" src="http://d.ifengimg.com/w178_h128/s2.mimg.ifeng.com/upload/day_130722/201307221503438679_iifeng.png" original="http://d.ifengimg.com/w166_h118_q75/p3.ifengimg.com/cmpp/2016/12/30/707a48de8371053cc5b0eea3a458a98d_size44_w168_h120.jpg" /><h4 style="margin-top:-20px;margin-bottom:5px;margin-left:99px;"><img style="display:inline-block;width:69.47px;height:15px;position:relative;margin:10px 10px 7px 0px;" src="http://p2.ifengimg.com/ifengimcp/pic/20161118/607bcfe0628cd1082b2f_size2_w176_h38.png" alt="" /><font style="color:#red;">03:51</font><span style="margin-top:17px;color:#a5a5a5;">9725</span></h4></article></a></li></ul><div class="heng_three" id="yc_news_ex"><h3><a>6人合影只5双腿？全球网友来“找腿”</a></h3><article id="yc_news_ex" aid="034230050497632" type="pic" doc_type="slide" down_tag="editor" tag="t3" url="share.iclient.ifeng.com/sharenews.f?aid=034230050497632"><ul class="hpic_list clearfix"><li><a><img  style="position:static" class="lazys" src="http://d.ifengimg.com/w196_h142/s2.mimg.ifeng.com/upload/day_130722/201307221503438679_iifeng.png" original="http://d.ifengimg.com/w194_h142/p1.ifengimg.com/a/2016_53/0ec69914f61a18f_size25_w500_h375.jpg"  /></a></li><li><a><img  style="position:static" class="lazys" src="http://d.ifengimg.com/w196_h142/s2.mimg.ifeng.com/upload/day_130722/201307221503438679_iifeng.png" original="http://d.ifengimg.com/w194_h142/p1.ifengimg.com/a/2016_53/3108d9d743175af_size71_w625_h373.jpg"  /></a></li><li><a><img  style="position:static" class="lazys" src="http://d.ifengimg.com/w196_h142/s2.mimg.ifeng.com/upload/day_130722/201307221503438679_iifeng.png" original="http://d.ifengimg.com/w194_h142/p3.ifengimg.com/a/2016_53/3adef2017f4cbaa_size28_w500_h442.jpg"  /></a></li></ul></article><h4><img style="display:inline-block;height:15px;position:relative;margin:0px 10px -2px 0px;" src="http://p2.ifengimg.com/ifengimcp/pic/20161118/607bcfe0628cd1082b2f_size2_w176_h38.png" alt="" />22:33<span> 4086</span></h4></div><ul class="yc_news"></ul>        <input type="hidden" id="recommendPage" value="1" />
+    <input type="hidden" id="maxnum" value="2" />
+            <div id='recommendList' ></div>
+        <div id='getMoreRe'style="hight:50px;"  class="loadings">正在载入...</div>
+    <div  id="lookmore_count" class="add150127" style="display: none;line-height:15px;padding-bottom:60px;padding-top:12px;">
+                    <a href="####" class="openApp lookmore" down_tag="lookmore" id="xgtjdiv_button"  style="-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;">没看够？去凤凰新闻看更多</a>
+            </div>
+</div>
+
+<script>
+
+    window.IFENG || (window.IFENG = {});
+    var recommend = {"1":["117343653","117355176","117335910","117318828","117336967","117042648","117356226","117349564","117086731","117340958"],"2":["117359448","117304301","117350592","117356413","117045446","117335321","117358003","117171207","117333627","117341624"]};
+    var countrecommend = '2';
+    var doctype = 'doc';
+    var referer = "030180050504779",
+        stadigurl = "http://stadig.ifeng.com/appsta.js?datatype=newsappsns&mos=iphone&userkey=47cf4800fc232bddb7b0e37d6b5dd1ae&ua=&share=unknown&session=",
+        timestr = "2016-12-31+08:56:00",
+        sharenews_dataApi =   "http://api.iclient.ifeng.com/ipadtestdoc",
+        sharenews_api =  "sharenews.f",
+        sharenews_openPath = "wakeupiOS/ifengnews";
+    var kind;
+    if(doctype === 'doc'){
+        kind = 'article';
+    }else if(doctype === 'slides'){
+        kind = 'pic';
+    }else{
+        kind = 'other';
+    }
+    var p=1;
+    if(p == countrecommend){
+        $("#getMoreRe").hide();
+    }
+    if(!recommend){
+        $("#recommendList").html("暂无内容");
+    }
+    function showlazys(){
+        $(".lazys").show().lazyload({
+            placeholder : "http://d.ifengimg.com/w196_h142/s2.mimg.ifeng.com/upload/day_130722/201307221503438679_iifeng.png",
+            effect : showeffect,
+            effectspeed:500,
+            threshold:200
+        });
+    }
+    function getRecommend(recommendPage){
+
+        if(recommend && countrecommend>=1 && recommendPage<= countrecommend){
+            var  recommendresult = recommend[recommendPage];
+
+
+
+            
+            if(recommendPage == 1){
+                var cache_list = '';
+            }else{
+                var cache_list = '';
+            }
+            if(cache_list){
+
+                $("#getMoreRe").hide();
+                if(doctype==9) {
+                    if (recommendPage == 1) {
+                        $("#recommendListPic").html(cache_list);
+                    } else if (recommendPage <= countrecommend) {
+                        $("#recommendListPic").append(cache_list);
+                    }
+                }else{
+                    if(recommendPage==1){
+                        $("#recommendList").html(cache_list);
+                    } else if(recommendPage<=countrecommend){
+                        $("#recommendList").append(cache_list);
+                    }
+                    //曝光埋点
+                    recomPoint()
+                }
+                if(recommendPage == countrecommend){
+                    $("#getMoreRe").hide();
+                    if(recommendPage == countrecommend){
+                        $('.add150127').show();
+                        $('.add150127').click(function(){ //统计尾部 下方点击打开按钮
+                        });
+                        $('.add150127 a').html('没看够？去凤凰新闻看更多!');
+                    }
+                }
+                showlazys();
+                count();
+            }else{
+                if(recommendresult){
+                    $("#getMoreRe").show();
+                    var delay = Math.max(IFENG.lastRequest ? IFENG.lastRequest + 1000 - (+new Date()) : 0, 500);
+                    setTimeout(function(){
+                        IFENG.lastRequest = +new Date();
+                        $.ajax({
+                            type : "POST",
+                            url : "ajaxrecommend",
+                            data : {recommendresult:recommendresult,doctype:doctype,url_address:'http://share.iclient.ifeng.com/sharenews.f?aid=030180050504779&autoFresh=1',recommendPage:recommendPage,column_id:'cmpp_17007_719_337',sourceId:''},
+                            success:function(datas){
+
+                                if(doctype==9){
+                                    if(recommendPage==1){
+                                        $("#recommendListPic").html(datas);
+                                    } else if(recommendPage<=countrecommend){
+                                        $("#recommendListPic").append(datas);
+                                    }
+                                } else {
+                                    if(recommendPage==1){
+                                        $("#recommendList").html(datas);
+                                    } else if(recommendPage<=countrecommend){
+                                        $("#recommendList").append(datas);
+                                    }
+                                    //曝光埋点
+                                    recomPoint()
+                                }
+                                if(!datas || recommendPage == countrecommend){
+                                    $("#getMoreRe").hide();
+                                    if(recommendPage == countrecommend){
+                                        $('.add150127').show();
+                                        $('.add150127').click(function(){ //统计尾部 下方点击打开按钮
+                                        });
+                                        $('.add150127 a').html('没看够？去凤凰新闻看更多!');
+                                    }
+                                }
+                                showlazys();
+                                count();
+                            }
+                        });
+                    }, 0);
+                }
+
+            }
+
+
+        } else {
+            $("#getMoreRe").hide();
+        }
+
+    }
+
+
+
+
+    var yunying_id =new Array();///已存在的运营位文章id
+    getYunyingId();
+    function getYunyingId(){
+        var i=0;
+
+        $('#recommend_area article').each(function(){
+            if($(this).attr('aid')){
+                var aid= $(this).attr('aid');
+                yunying_id[i++] = aid;
+            }
+        });
+
+    }
+
+
+    $(window).scroll(function () {
+        count();
+
+        clearTimeout(window.runCheckloadId);
+        window.runCheckloadId = setTimeout(checkload, 0);
+    });
+    $('#back-top a').click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 800);
+        return false;
+    });
+    checkload();
+    //建立加载判断函数
+    function checkload(){
+        var ua = navigator.userAgent,
+            weixin = ua.match(/MicroMessenger/ig),
+            isIos = ua.match(/iphone|ipod|ipad/ig);
+        if(isIos){
+            $('#ad_li_8').hide();
+        }
+        if(doctype==9){
+            var oDiv = $('#recommendListPic').get(0).offsetTop;//相关视频距离顶部的高度
+        } else {
+            var oDiv = $('#recommendList').get(0).offsetTop;//相关视频距离顶部的高度
+        }
+        var clientHeight = $(window).height(); //窗口的高度
+        var scrollTop = $(window).scrollTop(); //滚动条距离顶部的高度
+        var maxnum = ($("#maxnum").val() > 2) ? 2 : $("#maxnum").val();
+        IFENG.currPage || (IFENG.currPage = 1);
+
+        if((scrollTop + clientHeight) >= oDiv && IFENG.currPage <= maxnum){
+            getRecommend(IFENG.currPage);
+            currPage = ++IFENG.currPage;
+            // $('#recommendPage').val(recommendPage);
+        }
+
+    }
+
+</script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<script>
+    var sharetitle= "媒体：美俄又互相伤害了，2017有好戏看了";
+    var sharelink= "http://share.iclient.ifeng.com/sharenews.f?aid=030180050504779&autoFresh=1&forward=1";
+    var shareimgUrl= "http://d.ifengimg.com/w700_h700/p2.ifengimg.com/fck/2016_53/f5555f590536ea9_w810_h539.jpg";
+    var sharedesc= "来自凤凰新闻客户端";
+    var shareTimeline = "媒体：美俄又互相伤害了，2017有好戏看了  -凤凰新闻";
+    wx.config({
+        debug: false,
+        appId: "wxca6121c36061d682",
+        timestamp: "1483145760",
+        nonceStr: "L6BTwfI4NTrD5cGj",
+        signature: "a540ccc34d2143e366dd9dbd6bb4b1f23023dc85",
+        jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo'
+            // 所有要调用的 API 都要加到这个列表中
+        ]
+    });
+</script>
+<script type="text/javascript" src="http://p3.ifengimg.com/a/2016/1025/ifengSharenewsWeixin.js"></script>
+<!--<script type="text/javascript" src="http://y0.ifengimg.com/a/2015/0324/vlayer.min.js"></script>-->
+<script type="text/javascript" src="http://y0.ifengimg.com/a/2015/1009/ifengweb/video/vlayer_share.min.1.0.js"></script>
+<script type="text/javascript" src="http://p3.ifengimg.com/a/2016/0918/openlicent2016091801.js"></script>
+<script type="text/javascript">
+    var openAppClick = false;
+    var fresh = 0;
+    var nowurl = "http://share.iclient.ifeng.com/sharenews.f?aid=030180050504779&autoFresh=1";
+    var stadigurl = "";
+    var sharenews_dataApi =   "http://api.iclient.ifeng.com/ipadtestdoc";
+    var aid = "030180050504779",
+        hasVideo = "";
+    var sessionStr2 = "2016-12-31%2B08%3A56%3A00%23action%23type%3Dshowbar";
+    var timestr = "2016-12-31+08:56:00",
+        referer = "030180050504779",
+        UpdateUrl = "http://dl.app.ifengcdn.com/ifengnews/201612/IfengNewsV541_V5.4.1_7577.apk",
+        slogan = "阅读更多精彩内容，下载凤凰新闻正式版，给你看不同！",
+        AndroidSDK = '&intercept=1&UpdateUrl=' + UpdateUrl + '&slogan=' + encodeURI(slogan);
+</script>
+<script type="text/javascript" src="http://p2.ifengimg.com/a/2016/1229/callVideoApp201612291.js"></script>
+<script type="text/javascript" src="http://y1.ifengimg.com/ifengimcp/sta/20141023/jquery.cookie.js_103559.js"></script>
+<script>
+    var ua = navigator.userAgent,
+        weixin = ua.match(/MicroMessenger/ig),
+        QQ = ua.match(/QQ\//),
+        PC = !/iphone|ipod|ipad|android/ig.test(ua),
+        aist = GetQueryString('isappinstalled').replace(/[ ]/g,""),
+        isWeibo = ua.match(/WeiBo/i),
+        isSF = GetQueryString('ch').toLowerCase() == 'news_sf',
+        isAlipay = ua.match(/Alipay/),
+        isAndroid = navigator.userAgent.match(/android/ig),
+        isIos = navigator.userAgent.match(/iphone|ipod/ig),
+        isIpad = navigator.userAgent.match(/ipad/ig);
+    var reg = /([1-9]?[0-9])_([0-9])/ig;
+    var iosarr = reg.exec(ua);
+    if (iosarr != null && iosarr.length >= 3) {
+        var wxosEdition = iosarr[1];
+    } else {
+        var wxosEdition = 0;
+    }
+
+
+
+    function send_video_count(t) {
+        var sessionStr = timestr+"#action#type="+t+"$ref="+referer+"$kind=article";
+        var encodedSession = encodeURIComponent(sessionStr);
+        $('body').append('<img src="' + stadigurl + encodedSession +'" alt="" style="display:none;"/>');
+    }
+
+
+    Object.size = function (obj) {
+        var size = 0, key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
+    };
+    //加载视频$videolist
+    var videolist = [];
+    var commentUrl = "http%3A%2F%2Fnews.ifeng.com%2Fa%2F20161231%2F50504779_0.shtml";
+    // console.log(videolist);
+    for (var i = 0; i < Object.size(videolist); i++) {
+        if (videolist[i]) {
+            var mod_player = '';
+            if (i == 0) {
+                mod_player = 'mod_player';
+            } else {
+                mod_player = 'mod_player' + i;
+            }
+            var videoplayer = videoPlayer(mod_player, {
+                continuousPlay: true,
+                canfast: true,
+                virtualFullScreen: false,
+                setSource: function (canplayType) {
+                    if (canplayType == 'mp4') {
+                        return {
+                            videourl: videolist[i].videourl,
+                            //videoposter :videolist[i].videoposter
+                        }
+                    }
+                }
+            });
+            $('.yvp_time_panel_total').eq(i).html(videolist[i].time);
+            $('#mod_yvideo_player_' + i).find('.yvp_video').prepend('<img src="' + videolist[i].videoposter + '" style="height:100%; max-height:100%; max-width:100%; position:absolute;z-index:200;" id="videoposter_img" >');
+
+            if(isAndroid && (weixin || isWeibo || QQ)){
+                $('.fugai').eq(i).on('click', function () {
+                    var dom = $(this);
+                    var strCookie = document.cookie;
+                    var video_link_false;
+                    var arrCookie =strCookie.split("; ");
+                    for (var i = 0; i < arrCookie.length; i++) {
+                        var arr = arrCookie[i].split("=");
+                        if ("video_link_unopen" == arr[0]) {
+                            video_link_false = arr[1];
+                            break;
+                        }
+                    }
+                    if(!video_link_false){//cookie无不打开记录 弹框
+                        send_video_count('bounced');
+                        $('.video_link_div').show();
+                        $('.alert_bottom_right').click(function () {
+                            $('.video_link_div').hide();
+                            send_video_count('yesc');
+                            var ll = sharenews_dataApi + '?aid=' + aid;
+                            var ls = 'comifengnewsclient://call?type=doc&id=' + sharenews_dataApi + '?aid=' + aid;
+                            location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1349436184191&android_scheme=" + encodeURIComponent(ls + '&kind=' + origin_channel + '_bounced' + AndroidSDK) + '&ref=' + encodeURIComponent(ShareUrlNow);
+
+
+                        });
+                        $('.alert_bottom_left').click(function () {
+                            send_video_count('noc');
+
+                            var date = new Date();
+                            var expiresDays = 2;
+                            date.setTime(date.getTime() + expiresDays * 24 * 3600 * 1000);
+                            document.cookie = 'video_link_unopen=true;' + "expires=" + date.toGMTString();
+
+                            $('.video_link_div').hide();
+                            setTimeout(function () {
+                                $('#mod_player_poster').hide();
+                                dom.hide();
+                                dom.parent().find('.yvp_video video').get(0).play();
+                                dom.parent().find('.yvp_membrane').eq(0).show();
+                            }, 500);
+
+                        });
+                    }else {
+                        console.log(video_link_false);
+                        $('#mod_player_poster').hide();
+                        dom.hide();
+                        dom.parent().find('.yvp_video video').get(0).play();
+                        dom.parent().find('.yvp_membrane').eq(0).show();
+                    }
+
+                    $('.video_shadow').click(function () {
+                        $('.video_link_div').hide();
+                    });
+
+                });
+            }else if(wxosEdition >= 9){
+                $('.fugai').eq(i).on('click', function () {
+                    send_video_count('playclick');
+                    var dom = $(this);
+                    location.href = wxvideolocation + '&kind=' + origin_channel + '_bounced';
+                    setTimeout(function () {
+                        if(document.hasFocus()){
+                            $('#mod_player_poster').hide();
+                            dom.hide();
+                            dom.parent().find('.yvp_video video').get(0).play();
+                            dom.parent().find('.yvp_membrane').eq(0).show();
+                        }
+                    },500);
+                });
+            }else{
+                $('.fugai').eq(i).on('click', function () {
+                    $('#mod_player_poster').hide();
+                    $(this).hide();
+                    $(this).parent().find('.yvp_video video').get(0).play();
+                    $(this).parent().find('.yvp_membrane').eq(0).show();
+                });
+            }
+        }
+    }
+
+    $('.yvp_btn_val').on('click', function () {
+        $(this).parent().parent().parent().parent().find('.fugai').hide();
+        $(this).parent().parent().parent().parent().find('.yvp_membrane').show();
+    });
+    var isIos = navigator.userAgent.toLowerCase().match(/iphone|ipod/ig),
+        isIpad = navigator.userAgent.toLowerCase().match(/ipad/ig);
+
+    if (isIos || isIpad) {
+        $('.yvp_overlay_play').addClass('nobg');
+    } else {
+        $('.yvp_overlay_play').removeClass('nobg');
+    }
+
+    var staurlc = "http://stadig.ifeng.com/wapsta?surl=http%3A%2F%2Fi.ifeng.com%2Fsharenews4%2Fappreurl%3Fmid%3D1469608281848_zg049q643&ref=&rand=1628212271";
+    $('#openApps').click(function () {
+        //$.post(staurlc);
+    });
+
+    //立即打开
+    var docid = "030180050504779";
+
+        var home_location ="https://y0.ifengimg.com/wakeupiOS/ifengnews/call?type=list",
+        homeOpurl = "comifengnewsclient://call?";
+    var opurl = "comifengnewsapp://doc/030180050504779",
+        newOpurl = "comifengnewsclient://call?type=doc&id=http://api.iclient.ifeng.com/ipadtestdoc?aid=030180050504779&intercept=1&UpdateUrl=http://dl.app.ifengcdn.com/ifengnews/201612/IfengNewsV541_V5.4.1_7577.apk&slogan=%E9%98%85%E8%AF%BB%E6%9B%B4%E5%A4%9A%E7%B2%BE%E5%BD%A9%E5%86%85%E5%AE%B9%EF%BC%8C%E4%B8%8B%E8%BD%BD%E5%87%A4%E5%87%B0%E6%96%B0%E9%97%BB%E6%AD%A3%E5%BC%8F%E7%89%88%EF%BC%8C%E7%BB%99%E4%BD%A0%E7%9C%8B%E4%B8%8D%E5%90%8C%EF%BC%81"+ '&ref=' + encodeURIComponent(ShareUrlNow),
+        wxvideolocation = "https://api.iclient.ifeng.com/wakeupiOS/ifengnews/call?type=doc&scheme=1&playvideo=1&id=http%3A%2F%2Fapi.iclient.ifeng.com%2Fipadtestdoc%3Faid%3D030180050504779&app-argument=comifengnewsclient%3A%2F%2Fcall%3Ftype%3Ddoc%26id%3Dhttp%3A%2F%2Fapi.iclient.ifeng.com%2Fipadtestdoc%3Faid%3D030180050504779",
+        wxlocation = "https://y0.ifengimg.com/wakeupiOS/ifengnews/call/?type=doc&id=http%3A%2F%2Fapi.iclient.ifeng.com%2Fipadtestdoc%3Faid%3D030180050504779%26mid%3D1469608281848_zg049q643&app-argument=comifengnewsclient%3A%2F%2Fcall%3Ftype%3Ddoc%26id%3Dhttp%3A%2F%2Fapi.iclient.ifeng.com%2Fipadtestdoc%3Faid%3D030180050504779%26mid%3D1469608281848_zg049q643",
+        wxlocationcoment = "https://y0.ifengimg.com/wakeupiOS/ifengnews/call/?type=doc&id=http%3A%2F%2Fapi.iclient.ifeng.com%2Fipadtestdoc%3Faid%3D030180050504779%26mid%3D1469608281848_zg049q643&comment=1&app-argument=comifengnewsclient%3A%2F%2Fcall%3Ftype%3Ddoc%26id%3Dhttp%253A%252F%252Fapi.iclient.ifeng.com%252Fipadtestdoc%253Faid%253D030180050504779%2526mid%253D1469608281848_zg049q643%26comment%3D1",
+                newOpurlCom = newOpurl + '&comment=1',
+        download = 'http://i.ifeng.com/qqyyb/appreurl?reurl=' + encodeURIComponent('http://statistics.appstore.ifeng.com/index.php/api/godownload?app_id=4&d_ch=5312'),
+        ua = navigator.userAgent,
+        weixin = ua.match(/MicroMessenger/ig),
+        QQ = ua.match(/QQ\//),
+        isWeibo = ua.match(/WeiBo/i),
+        getCallupArgs = function () {
+            return {
+                'data-ios-native-new-url': newOpurl,
+                'data-android-native-new-url': newOpurl,
+                'data-download-url': download,
+                'isGoToOppApk': !isSF && !isAlipay && (window.isActive == 1 || window.location.hash == '#active')
+            };
+        }
+    getCallupArgsCom = function () {
+        return {
+            'data-ios-native-new-url': newOpurlCom,
+            'data-android-native-new-url': newOpurlCom,
+            'data-download-url': download,
+            'isGoToOppApk': !isSF && !isAlipay && (window.isActive == 1 || window.location.hash == '#active')
+        };
+    }
+
+    $(document).ready(function () {
+        if(hasVideo === 'Y'){
+            var sessionStr = timestr+"#info#type=newsvp$id="+aid+"$kind=article";
+            var encodedSession = encodeURIComponent(sessionStr);
+            $('body').append('<img src="' + stadigurl + encodedSession +'" alt="" style="display:none;"/>');
+        }
+        $('.fugai').css('z-index','2001');
+        $('#videoplay00but').click(function () {
+            $('#videoplay00').get(0).play();
+            $(this).parent().hide();
+        });
+        $('.videoplay00').click(function () {
+
+            $('video[id^="videoplay00"]').trigger('play');
+        });
+
+
+        $('.openAppCom').click(function () {
+            var down_tag = $(this).attr('down_tag');
+            var download_new = down_array[down_tag]+'&android_scheme='+encodeURIComponent(newOpurlCom + '&kind=' + origin_channel + '_' +down_tag);
+            var newOpurlCom_new = newOpurlCom + '&kind=' + origin_channel + '_' +down_tag;
+
+            if (weixin || QQ || isWeibo) {
+                if(wxosEdition >= 9){
+                    location.href=wxlocationcoment + '&kind=' + origin_channel + '_' +down_tag;
+                    setTimeout(function(){
+                        location.href = location.href + '&fresh=1';
+                    },1000);
+                    return false;
+                }
+                if (isAndroid) {
+                    if(weixin || QQ || isWeibo){
+                        var rtn = new RedirectToNative();
+                        getNewCallupArgsCom= function () {
+                            return {
+                                'data-ios-native-new-url': newOpurlCom_new,
+                                'data-android-native-new-url': newOpurlCom_new,
+                                'data-download-url': download_new,
+                                'isGoToOppApk': !isSF && !isAlipay && (window.isActive == 1 || window.location.hash == '#active')
+                            };
+                        }
+                        rtn._redirectByParam(getNewCallupArgsCom());
+                    }else{
+                        $('.open-pop .android').show();
+                    }
+                } else if (isIos || isIpad) {
+                    $('.open-pop .ios').show();
+                }
+                $('.open-pop').show();
+                // 主动触发
+                window.location.hash = 'active';
+            } else {
+                // 来自手凤/支付宝
+                if (isSF || isAlipay) {
+                    var $this = $(this),
+                        id = this.id;
+                    $.inArray(id, ['openApp', 'openApps']) > -1 && $this.attr({'href': isAlipay ? window.alipayDownUrl : id == 'openApps' ? window.sfDownUrlBottom : window.sfDownUrlTop});
+                    setTimeout(function () {
+                        $this.attr({'href': 'javascript:;'});
+                    }, 300);
+                } else {
+                    window.isActive = 1;
+                }
+                openAppClick = true;
+                var rtn = new RedirectToNative();
+                getNewCallupArgsCom= function () {
+                    return {
+                        'data-ios-native-new-url': newOpurlCom_new,
+                        'data-android-native-new-url': newOpurlCom_new,
+                        'data-download-url': download,
+                        'isGoToOppApk': !isSF && !isAlipay && (window.isActive == 1 || window.location.hash == '#active')
+                    };
+                }
+                rtn._redirectByParam(getNewCallupArgsCom());
+            }
+        });
+    });
+    $('.readpaper').click(function () {
+        $.post("http://i.ifeng.com/sharenews1/appreurl?url=");
+    });
+    $('.lookmore').click(function () {
+        $.post("http://i.ifeng.com/sharenews2/appreurl?url=");
+    });
+    $('#openApp').click(function () {
+        $.post("http://i.ifeng.com/sharenews3/appreurl?url=");
+    });
+
+</script>
+<script type="text/javascript"  src="http://p2.ifengimg.com/a/2016/1229/sharenews_public20161229.js"></script>
+
+        <script type="text/javascript" src="http://stadig.ifeng.com/appsta.js?datatype=newsappsns&mos=iphone&userkey=47cf4800fc232bddb7b0e37d6b5dd1ae&ua=&share=unknown&session=2016-12-31%2B08%3A56%3A00%23page%23id%3D030180050504779%24ref%3D%24type%3Darticle%24url%3Dhttp%3A%2F%2Fshare.iclient.ifeng.com%2Fsharenews.f%3Faid%3D030180050504779%26autoFresh%3D1"></script>    <script>
+        var stadigurl = "http://stadig.ifeng.com/appsta.js?datatype=newsappsns&mos=iphone&userkey=47cf4800fc232bddb7b0e37d6b5dd1ae&ua=&share=unknown&session=",
+            app_downloadurl = "",
+            referer = "030180050504779",
+            doctype = "article",
+            time = "2016-12-31+08:56:00";
+        fromsharered = false;
+      if(doctype === 'article' || doctype === 'pic'){
+      // 曝光埋点
+        var clickmore=new ExposureFuc("yc_news_ex");//推荐运营位1，需添加ID名称
+        var lookmore=new ExposureFuc("lookmore_count");//没看够？去凤凰新闻看更多
+      }
+    </script>
+    <script type="text/javascript"  src="http://p2.ifengimg.com/a/2016/1229/sharenews_count.js"></script>
+      
+  
+  
+  
+  
+  <!--处理返回按键到H5首页-->
+<script>
+      
+    var _url=location.search;
+    var pattern = /(forward)+/;
+    if(pattern.test(_url)){
+        var script=document.createElement('script');
+        script.setAttribute("src","http://p1.ifengimg.com/a/2016/1205/bactindex_v1.js")
+        document.getElementsByTagName('head')[0].appendChild(script)
+    }
+  
+</script>
+ <!--红包弹层 begin-->
+<style>
+#redbox{position:fixed;bottom:90px;right:9px;z-index:2500;width:96px;height:82.5px;background:url("http://p2.ifengimg.com/a/2016/1228/redbox.png") no-repeat;-webkit-background-size:100% 100%;-moz-background-size:100% 100%;-o-background-size:100% 100%;background-size:100% 100%;}
+.redboxlink{display:block;width:100%;height:100%;}
+.redboxclose{position:absolute;top:-5px;right:5px;display:block;width:17.5px;height:17.5px;background:url("http://p2.ifengimg.com/a/2016/1228/redboxclose.png") no-repeat;-webkit-background-size:100% 100%;-moz-background-size:100% 100%;-o-background-size:100% 100%;background-size:100% 100%;}
+.redbox_pop{display:none;position:fixed;top:50%;left:50%;z-index:3000;margin:-230.5px 0 0 -171px;width:342px;height:461px;background: url("http://p2.ifengimg.com/a/2016/1228/redbox_pop.png") no-repeat;-webkit-background-size:100% 100%;-moz-background-size:100% 100%;-o-background-size:100% 100%;background-size:100% 100%;}
+.redbox_close{position:absolute;top:20px;left:20px;display:block;width:21px;height:21px;background:url("http://p2.ifengimg.com/a/2016/1228/redbox_close.png") no-repeat;-webkit-background-size:100% 100%;-moz-background-size:100% 100%;-o-background-size:100% 100%;background-size:100% 100%;}
+.redbox_mask{display:none;position:fixed;width:100%;height:100%;z-index:2000;left:0;top:0;background:rgba(0,0,0,.3)}
+.redbox_link{display:block;width:100%;height:100%;}
+
+@media screen  and (max-width: 320px) {
+   .redbox_pop{margin:-197.57px 0 0 -146.57px;width:293.14px;height:395.14px;}
+}
+</style>
+<div id="redbox">
+   <i class="redboxlink"></i>
+   <i class="redboxclose"></i>
+</div>
+<div class="redbox_pop">
+   <a class="redbox_link" href="javascript:;"></a>
+   <i class="redbox_close"></i>
+</div>
+<div class="redbox_mask"></div>
+
+<script type="text/javascript">
+   $(function(){
+
+       $('.redboxlink').click(function(){
+           $('#redbox').hide();
+           $('.redbox_pop,.redbox_mask').show();
+           return false;
+       });
+
+       $('.redboxclose').click(function(){
+           $('#redbox').hide();
+       });
+
+       $('.redbox_close').click(function(){
+           $('.redbox_pop,.redbox_mask').hide();
+           $('#redbox').hide();
+       });
+
+       $('.redbox_link').click(function () {
+           if(QQ || weixin || isWeibo){
+               if(isAndroid){
+                   location.href =  'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1352745692728&android_scheme=comifextnews://call?type=web';
+               }else{
+                   location.href = 'https://y0.ifengimg.com/wakeupiOS/ifengnews/call/?type=list';
+               }
+           }else{
+               if(isIos){
+                   location.href = 'http://statistics.appstore.ifeng.com/index.php/api/godownload?app_id=4&d_ch=1924';
+               }else{
+                   location.href = 'http://dl.app.ifengcdn.com/ifengnews/201612/IfengNewsV540_V5.4.0_7543.apk';
+               }
+           }
+           type = 'redbag';
+           var sessionStr = time+"#action#type="+type+"$ref=" + referer + "$kind="+doctype+"$od=";
+           var encodedSession = encodeURIComponent(sessionStr);
+           $('body').append('<img src="' + stadigurl + encodedSession +'" alt="" style="display:none;"/>');
+
+       });
+
+   })
+</script>
+<!--红包弹层 end--> 
+  
+</html>
+
